@@ -17,31 +17,37 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class SimpleEntityReadWriteTest {
+class AsteroidDatabaseTest {
     private lateinit var asteroidDao: AsteroidDao
     private lateinit var db: AsteroidDatabase
 
+
     @Before
     fun createDb() {
-       val context = ApplicationProvider.getApplicationContext<Context>()
+        //Creates context for the test
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        //Uses context and build database to store data in memory instead of database
         db = Room.inMemoryDatabaseBuilder(
             context, AsteroidDatabase::class.java
-        ).allowMainThreadQueries().build()
+        ).build()
 
+        // passes reference to dao
         asteroidDao = db.asteroidDao()
     }
+
 
     @After
     @Throws(IOException::class)
     fun closeDb() {
+        // close db once all test are ran
         db.close()
     }
 
+
+    //TODO add test add a list of asteroids to a database
     @Test
     @Throws(IOException::class)
-     fun writeUserAndReadInList() {
-
-
+    fun insertAsteroidTest() {
         // create the data
         val asteroid = TestUtil.createAsteroid(
             1, 2, 0.4,
@@ -49,20 +55,30 @@ class SimpleEntityReadWriteTest {
             12.3, 12.3
         )
 
-        runBlocking {
-            //insert the data to the database
-            asteroidDao.insertAsteroid(asteroid)
-        }
+        // run database request inside coroutineScope
+        //insert the data to the database
+        runBlocking { asteroidDao.insertAsteroid(asteroid) }
 
         //result
         var result: Asteroid? = null
 
-        runBlocking {
-            result = asteroidDao.getAsteroid(1)
-        }
+        // run database request inside coroutineScope
+        runBlocking { result = asteroidDao.getAsteroid(1) }
 
         //assertThat asteroid was entered into database
-            assertEquals(true, result?.hazardous)
+        assertEquals(true, result?.hazardous)
+    }
+
+
+    //TODO add test to remove old meteors out the database after 7 days
+    @Test
+    @Throws(IOException::class)
+    fun removeAsteroidTest() {
 
     }
+
+
+    //TODO add test to return asteroids in descending order
+
+
 }
