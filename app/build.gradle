@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 31
@@ -50,12 +51,16 @@ dependencies {
 
     // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:$room_version"
+    implementation 'junit:junit:4.12'
     annotationProcessor "androidx.room:room-compiler:$room_version"
     // To use Kotlin annotation processing tool (kapt)
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
 
 
+    // Retrofit Coroutines Support - Deprecated - No more required
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
 
 
     // Coroutines
@@ -71,4 +76,11 @@ dependencies {
     testImplementation "junit:junit:$JUnit_version"
     androidTestImplementation "androidx.test.ext:junit:$JUnitExtension_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCore_version"
+
+
+    //Testing ViewModels
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
 }
