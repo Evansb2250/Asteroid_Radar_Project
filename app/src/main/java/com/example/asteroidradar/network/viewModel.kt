@@ -42,7 +42,7 @@ class viewModel : ViewModel(){
         }
 
 
-
+    //Function I am having trouble with I am trying to convert the json into an object
     fun gsonExample(){
         val gson = GsonBuilder().create()
         val nearEarthObjects = gson.fromJson(_stringDataOfAPi.value, NearEarthObjects::class.java)
