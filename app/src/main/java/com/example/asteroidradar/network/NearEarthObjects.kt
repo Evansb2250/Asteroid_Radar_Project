@@ -1,18 +1,26 @@
 package com.example.asteroidradar.network
+import kotlinx.serialization.*
 
-import com.google.gson.annotations.SerializedName
 
 
+
+
+
+
+
+
+@Serializable
+data class TransferDomainObjects(
+    @SerialName( "near_earth_objects")
+    val nearEarthObject: NearEarthObjects) {
+}
+
+@Serializable
 data class NearEarthObjects(
-    @SerializedName("id")
-    val id:Int,
-    @SerializedName("absolute_magnitude_h")
-    val absoluteMagnitude:Double,
-    @SerializedName("estimated_diameter_max")
-            val estimated_diameter_max:Double,
-    @SerializedName("is_potentially_hazardous_asteroid")
-    val is_potentially_hazardous_asteroid : Boolean) {
+    val date:String?,
+    @SerialName("absolute_magnitude_h")
+    val absoluteMagniture: Double
+    ) {
 }
 
 
-data class CloseApproachData(val kilometers_per_second: Double, val astronomical : Double )

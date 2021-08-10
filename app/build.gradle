@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlinx-serialization'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
 
@@ -86,7 +87,5 @@ dependencies {
 
 
     //GSON
-
-    implementation "com.google.code.gson:gson:$version_gson"
-
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
 }

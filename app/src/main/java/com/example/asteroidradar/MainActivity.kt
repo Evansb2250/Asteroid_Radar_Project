@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         
-        viewModel.neoNasaObject.observe(this, Observer { element -> Log.i("Retro", "object ${element.id}") })
+        viewModel.neoNasaObject.observe(this, Observer { element -> Log.i("Retro", "object ${element}") })
 
         viewModel.getAsteroidsFromApi()
     }

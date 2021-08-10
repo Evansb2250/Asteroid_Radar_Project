@@ -4,7 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.gson.GsonBuilder
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +32,7 @@ class viewModel : ViewModel(){
         var result = ""
         NasaApi.retrofitService.getImageOfTheDay().enqueue(object: Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>) {
+                    //turn response into a string
                     result = response.body().toString()
                     _stringDataOfAPi.value = result
                     Log.i("Retro", "onResponse ${response.body().toString()}")
@@ -43,10 +47,12 @@ class viewModel : ViewModel(){
 
 
     //Function I am having trouble with I am trying to convert the json into an object
-    fun gsonExample(){
-        val gson = GsonBuilder().create()
-        val nearEarthObjects = gson.fromJson(_stringDataOfAPi.value, NearEarthObjects::class.java)
-        Log.i("RetrofitExample", " example ${nearEarthObjects.id}")
+
+
+    fun createObjectsFromJsonString(){
+        val format = Json { ignoreUnknownKeys = true}
+        val data = _stringDataOfAPi.value?.let { format.decodeFromString<TransferDomainObjects>(it) }
+        Log.i("RetrofitExample", " example ${data}")
     }
 
 
@@ -58,7 +64,9 @@ class viewModel : ViewModel(){
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 result = response.body().toString()
                 _stringDataOfAPi.value = result
-                gsonExample()
+
+
+                createObjectsFromJsonString()
                 Log.i("Retro", "onResponse ${response.body().toString()}")
             }
 
