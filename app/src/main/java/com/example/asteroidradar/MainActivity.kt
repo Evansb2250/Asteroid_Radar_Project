@@ -18,13 +18,14 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this).get(viewModel::class.java)
 
 
-
-        viewModel.data.observe(this, Observer {
+        viewModel.stringData.observe(this, Observer {
             Log.i("Retro", "my string ${it}")
-
             findViewById<TextView>(R.id.textView).text = it
         })
 
-        viewModel.asteroidExample()
+        
+        viewModel.neoNasaObject.observe(this, Observer { element -> Log.i("Retro", "object ${element.id}") })
+
+        viewModel.getAsteroidsFromApi()
     }
 }

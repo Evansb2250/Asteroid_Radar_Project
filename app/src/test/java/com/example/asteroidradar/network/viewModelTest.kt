@@ -14,7 +14,7 @@ class viewModelTest : TestCase(){
     fun testAPICALL(){
 
         var result = ""
-        ImageApi.retrofitService.getImageOfTheDay().enqueue(object: Callback<String> {
+        NasaApi.retrofitService.getImageOfTheDay().enqueue(object: Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 result = response.body().toString()
             }

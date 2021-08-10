@@ -27,7 +27,6 @@ interface Webservice {
     @GET("planetary/apod?")
     fun getImageOfTheDay(@Query("api_key") key:String = API_KEY): Call<String>
 
-
     // neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=API_KEY
     @GET("neo/rest/v1/feed?")
     fun getAsteroids(
@@ -39,7 +38,7 @@ interface Webservice {
 }
 
 
-object ImageApi {
+object NasaApi {
     val retrofitService: Webservice by lazy {
         retrofit.create(Webservice::class.java)
     }
