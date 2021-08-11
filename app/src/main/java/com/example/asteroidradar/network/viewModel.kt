@@ -44,9 +44,4 @@ class viewModel : ViewModel() {
         callback?.let {  createObjectsFromJsonString(callback!!)}
     }
 
-
-
-    init {
-
-    }
 }

@@ -1,7 +1,9 @@
 package com.example.asteroidradar.network
 
+import androidx.lifecycle.MutableLiveData
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
@@ -46,5 +48,33 @@ object NasaApi {
 
 
 
+
+fun getAsteroidsFromApi(
+    startDate: String,
+    endDate: String,
+    callBackResponse: MutableLiveData<Response<String>>
+) {
+    NasaApi.retrofitService.getAsteroids(startDate, endDate).enqueue(object : Callback<String> {
+        override fun onResponse(call: Call<String>, response: Response<String>) {
+            callBackResponse.value = response
+        }
+        override fun onFailure(call: Call<String>, t: Throwable) {}
+    })
+}
+
+
+//request the image of the day from Nasa web service
+fun getImageFromApi(): Response<String>? {
+    var result: Response<String>? = null
+    NasaApi.retrofitService.getImageOfTheDay().enqueue(object : Callback<String> {
+        //turn response into a string
+        override fun onResponse(call: Call<String>, response: Response<String>) {
+            result = response
+        }
+
+        override fun onFailure(call: Call<String>, t: Throwable) {}
+    })
+    return result
+}
 
 

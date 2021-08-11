@@ -10,7 +10,63 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-fun estimatedMax(estimatedDiameterObject: JSONObject) =
+/*
+Takes a list of dates  and the beginning location of the JSON ELEMENT
+Cycles through the dates in the Json and creates a list Asteroids based on the API call response
+ */
+fun allocateJsonByDate(
+    dates: List<String>,
+    jsonObject: JSONObject
+): ArrayList<Asteroid>? {
+    val listOfAsteroids = ArrayList<Asteroid>()
+    //Time complexity of BIG O of (N*K)
+    for (date in dates) {
+        val jsonArray = jsonObject.getJSONArray(date)
+        for (i in 0 until jsonArray.length()) {
+            addToList(listOfAsteroids,  setElementsFromJsonArrayToMap(jsonArray.getJSONObject(i)))
+        }
+    }
+
+    Log.i("APICALL", "${listOfAsteroids.size}")
+    return listOfAsteroids
+}
+
+
+private fun addToList(listOfAsteroids: ArrayList<Asteroid>, map: Map<String, Any>) {
+    listOfAsteroids.add(
+        Asteroid(
+            id = map.get(JSON_ELEMENT_ID) as Long,
+            absoluteMagnitude = map.get(ABSOLUTE_MAGNITUDE) as Double,
+            estimatedDiameters = map.get(ESTIMATED_DIAMETERS) as EstimatedDiameters,
+            closeApproachData = map.get(CLOSE_APPROACH_DATA) as CloseApproachData,
+            isHazardous = map.get(IS_POTENTIALLY_HAZARDOUS_ASTEROID) as Boolean
+        )
+    )
+}
+
+private fun setElementsFromJsonArrayToMap(jsonElement: JSONObject): Map<String, Any> {
+    val jsonElementMap = mutableMapOf<String, Any>()
+    jsonElementMap.put(JSON_ELEMENT_ID, jsonElement.getString(JSON_ELEMENT_ID).toLong())
+    jsonElementMap.put(ABSOLUTE_MAGNITUDE, jsonElement.getString(ABSOLUTE_MAGNITUDE).toDouble())
+    jsonElementMap.put(
+        IS_POTENTIALLY_HAZARDOUS_ASTEROID,
+        jsonElement.getString(IS_POTENTIALLY_HAZARDOUS_ASTEROID).toBoolean()
+    )
+    jsonElementMap.put(
+        ESTIMATED_DIAMETERS,
+        estimatedMax(jsonElement.getJSONObject(ESTIMATED_DIAMETERS))
+    )
+    jsonElementMap.put(
+        CLOSE_APPROACH_DATA,
+        createClosedApproachData(jsonElement.getJSONArray(CLOSE_APPROACH_DATA))
+    )
+    return jsonElementMap
+}
+
+
+
+
+private fun estimatedMax(estimatedDiameterObject: JSONObject) =
     EstimatedDiameters(
         estimatedDiameterObject
             .getJSONObject(KILOMETERS)
@@ -19,7 +75,7 @@ fun estimatedMax(estimatedDiameterObject: JSONObject) =
     )
 
 
-fun createClosedApproachData(approachData: JSONArray): CloseApproachData {
+private fun createClosedApproachData(approachData: JSONArray): CloseApproachData {
 
     val closeApproachDate = approachData
         .getJSONObject(0)
@@ -41,64 +97,3 @@ fun createClosedApproachData(approachData: JSONArray): CloseApproachData {
 }
 
 
-
-/*
-Takes a list of dates  and the beginning location of the JSON ELEMENT
-Cycles through the dates in the Json and creates a list Asteroids based on the API call response
- */
-fun allocateJsonByDate(
-    dates: List<String>,
-    jsonObject: JSONObject
-): ArrayList<Asteroid>? {
-    val listOfAsteroids = ArrayList<Asteroid>()
-    //Time complexity of BIG O of (N*K)
-    for (date in dates) {
-        val h = mapOf<String, Any>()
-        val jsonArray = jsonObject.getJSONArray(date)
-        for (i in 0 until jsonArray.length()) {
-            val map = getElementFromJsonArray(jsonArray.getJSONObject(i))
-            val asteroid =       Asteroid(
-                id = map.get(JSON_ELEMENT_ID) as Long,
-                absoluteMagnitude = map.get(ABSOLUTE_MAGNITUDE) as Double,
-                estimatedDiameters = map.get(ESTIMATED_DIAMETERS) as EstimatedDiameters,
-                closeApproachData = map.get(CLOSE_APPROACH_DATA) as CloseApproachData,
-                isHazardous = map.get(IS_POTENTIALLY_HAZARDOUS_ASTEROID) as Boolean
-            )
-
-            Log.i("APICALL", " my call ${asteroid}")
-
-            listOfAsteroids.add(asteroid)
-        }
-    }
-    return listOfAsteroids
-}
-
-fun getElementFromJsonArray(jsonElement: JSONObject): Map<String, Any> {
-    val jsonElementMap = mutableMapOf<String, Any>()
-    jsonElementMap.put(JSON_ELEMENT_ID, jsonElement.getString(JSON_ELEMENT_ID).toLong())
-    jsonElementMap.put(ABSOLUTE_MAGNITUDE, jsonElement.getString(ABSOLUTE_MAGNITUDE).toDouble())
-    jsonElementMap.put(IS_POTENTIALLY_HAZARDOUS_ASTEROID, jsonElement.getString(IS_POTENTIALLY_HAZARDOUS_ASTEROID).toBoolean() )
-    jsonElementMap.put(ESTIMATED_DIAMETERS, estimatedMax(jsonElement.getJSONObject(ESTIMATED_DIAMETERS) ))
-    jsonElementMap.put(CLOSE_APPROACH_DATA,createClosedApproachData(jsonElement.getJSONArray(CLOSE_APPROACH_DATA)) )
-    return jsonElementMap
-}
-
-fun getAsteroidsFromApi(startDate: String, endDate:String, callBackResponse: MutableLiveData<Response<String>>){
-    NasaApi.retrofitService.getAsteroids(startDate, endDate).enqueue(object : Callback<String> {
-        override fun onResponse(call: Call<String>, response: Response<String>) { callBackResponse.value = response }
-        override fun onFailure(call: Call<String>, t: Throwable) {} })
-}
-
-
-
-
-
-//request the image of the day from Nasa web service
-fun getImageFromApi() : Response<String>?{
-    var result: Response<String> ?= null
-    NasaApi.retrofitService.getImageOfTheDay().enqueue(object : Callback<String> {
-        //turn response into a string
-        override fun onResponse(call: Call<String>, response: Response<String>) { result = response }
-        override fun onFailure(call: Call<String>, t: Throwable) {}})
-    return result
-}
