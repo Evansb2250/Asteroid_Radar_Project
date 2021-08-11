@@ -23,7 +23,7 @@ fun allocateJsonByDate(
     for (date in dates) {
         val jsonArray = jsonObject.getJSONArray(date)
         for (i in 0 until jsonArray.length()) {
-            addToList(listOfAsteroids,  setElementsFromJsonArrayToMap(jsonArray.getJSONObject(i)))
+            addToList(listOfAsteroids,  setElementsFromJsonArrayToMap(jsonArray.getJSONObject(i), hashMapOf<String, Any>()))
         }
     }
 
@@ -44,56 +44,28 @@ private fun addToList(listOfAsteroids: ArrayList<Asteroid>, map: Map<String, Any
     )
 }
 
-private fun setElementsFromJsonArrayToMap(jsonElement: JSONObject): Map<String, Any> {
-    val jsonElementMap = mutableMapOf<String, Any>()
+private fun setElementsFromJsonArrayToMap(jsonElement: JSONObject, jsonElementMap: MutableMap<String, Any>): Map<String, Any> {
     jsonElementMap.put(JSON_ELEMENT_ID, jsonElement.getString(JSON_ELEMENT_ID).toLong())
     jsonElementMap.put(ABSOLUTE_MAGNITUDE, jsonElement.getString(ABSOLUTE_MAGNITUDE).toDouble())
-    jsonElementMap.put(
-        IS_POTENTIALLY_HAZARDOUS_ASTEROID,
-        jsonElement.getString(IS_POTENTIALLY_HAZARDOUS_ASTEROID).toBoolean()
-    )
-    jsonElementMap.put(
-        ESTIMATED_DIAMETERS,
-        estimatedMax(jsonElement.getJSONObject(ESTIMATED_DIAMETERS))
-    )
-    jsonElementMap.put(
-        CLOSE_APPROACH_DATA,
-        createClosedApproachData(jsonElement.getJSONArray(CLOSE_APPROACH_DATA))
-    )
+    jsonElementMap.put(IS_POTENTIALLY_HAZARDOUS_ASTEROID, jsonElement.getString(IS_POTENTIALLY_HAZARDOUS_ASTEROID).toBoolean())
+    jsonElementMap.put(ESTIMATED_DIAMETERS, estimatedMax(jsonElement.getJSONObject(ESTIMATED_DIAMETERS)))
+    jsonElementMap.put(CLOSE_APPROACH_DATA, createClosedApproachData(jsonElement.getJSONArray(CLOSE_APPROACH_DATA)))
     return jsonElementMap
 }
 
-
-
-
 private fun estimatedMax(estimatedDiameterObject: JSONObject) =
-    EstimatedDiameters(
-        estimatedDiameterObject
-            .getJSONObject(KILOMETERS)
-            .getString(ESTIMATED_DIAMETER_MAX)
-            .toDouble()
-    )
+    EstimatedDiameters(estimatedDiameterObject.getJSONObject(KILOMETERS).getString(ESTIMATED_DIAMETER_MAX).toDouble())
 
 
 private fun createClosedApproachData(approachData: JSONArray): CloseApproachData {
 
-    val closeApproachDate = approachData
-        .getJSONObject(0)
-        .getString(CLOSE_APPROACH_DATE)
+    val closeApproachDate = approachData.getJSONObject(0).getString(CLOSE_APPROACH_DATE)
 
-    val speed = approachData.getJSONObject(0)
-        .getJSONObject(RELATIVEVELOCITY)
-        .getString(KILOMETERS_PER_SECOND).toDouble()
+    val speed = approachData.getJSONObject(0).getJSONObject(RELATIVEVELOCITY).getString(KILOMETERS_PER_SECOND).toDouble()
 
-    val astronomical = approachData.getJSONObject(0)
-        .getJSONObject(MISS_DISTANCE)
-        .getString(ASTRONOMICAL).toDouble()
+    val astronomical = approachData.getJSONObject(0).getJSONObject(MISS_DISTANCE).getString(ASTRONOMICAL).toDouble()
 
-    return CloseApproachData(
-        closeApproachDate,
-        RelativeVelocity(speed),
-        MissDistance(astronomical)
-    )
+    return CloseApproachData(closeApproachDate, RelativeVelocity(speed), MissDistance(astronomical))
 }
 
 
