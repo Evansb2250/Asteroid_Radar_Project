@@ -4,23 +4,18 @@ import kotlinx.serialization.*
 
 
 
-
-
-
-
-
-@Serializable
-data class TransferDomainObjects(
-    @SerialName( "near_earth_objects")
-    val nearEarthObject: NearEarthObjects) {
-}
-
-@Serializable
-data class NearEarthObjects(
-    val date:String?,
-    @SerialName("absolute_magnitude_h")
-    val absoluteMagniture: Double
+data class Asteroid(
+    var id:Long,
+    var absoluteMagnitude: Double,
+    var estimatedDiameters: EstimatedDiameters,
+    var closeApproachData: CloseApproachData,
+    var isHazardous:Boolean,
     ) {
 }
 
+data class EstimatedDiameters(val estimatedDiameterMax : Double )
 
+
+data class CloseApproachData(val date:String ,var relativeVelocity: RelativeVelocity, var missDistance: MissDistance)
+data class RelativeVelocity(val kilometersPerSecond: Double )
+data class MissDistance(val astronomical: Double )

@@ -3,6 +3,7 @@ package com.example.asteroidradar
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 import com.example.asteroidradar.database.Asteroid
+import org.json.JSONObject
 
 
 class TestUtil {
@@ -30,3 +31,5 @@ class TestUtil {
         }
     }
 }
+
+
