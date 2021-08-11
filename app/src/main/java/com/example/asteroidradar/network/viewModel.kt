@@ -5,15 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.asteroidradar.*
-import kotlinx.serialization.json.JsonArray
-import org.json.JSONArray
 import org.json.JSONObject
 import org.json.JSONTokener
-
 import retrofit2.Call
 import retrofit2.Callback
+
 import retrofit2.Response
-import com.example.asteroidradar.CLOSE_APPROACH_DATE as CLOSE_APPROACH_DATE
+
 
 
 class viewModel : ViewModel() {
@@ -38,10 +36,25 @@ class viewModel : ViewModel() {
 
 
     //TODO add a filter to the apiCall parameter
-    fun apiCall() {
+    fun apiCall(response: Response<String>) {
         //TODO set a when  operator
-        val response = getAsteroidsFromApi(startDate, endDate)
-        response?.let { createObjectsFromJsonString(it) }
+        Log.i("APICALL", response.toString())
+         response?.let {  createObjectsFromJsonString(response!!)}
+    }
+
+
+
+    //request the nested Json file from the Nasa web service
+    fun getAsteroidsFromApi(startDate: String, endDate:String){
+        var result: Response<String>? = null
+        val lock = true
+
+        NasaApi.retrofitService.getAsteroids(startDate, endDate).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                result = response
+                apiCall(result!!)
+            }
+            override fun onFailure(call: Call<String>, t: Throwable) {} })
     }
 
 
