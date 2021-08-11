@@ -3,11 +3,8 @@ package com.example.asteroidradar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.asteroidradar.network.viewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     val startDate = "2019-09-08"
@@ -17,11 +14,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val viewModel = ViewModelProvider(this).get(viewModel::class.java)
+        viewModel.apiCalback.observe(this, { response -> viewModel.callBackReceived(response)})
 
 
-        
-        viewModel.neoNasaObject.observe(this, { element -> Log.i("Retro", "object ${element}") })
-
-        viewModel.getAsteroidsFromApi(startDate, endDate)
+        viewModel.apiCall()
     }
 }

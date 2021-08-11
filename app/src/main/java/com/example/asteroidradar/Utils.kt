@@ -1,6 +1,7 @@
 package com.example.asteroidradar
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.example.asteroidradar.network.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -50,7 +51,6 @@ fun allocateJsonByDate(
     jsonObject: JSONObject
 ): ArrayList<Asteroid>? {
     val listOfAsteroids = ArrayList<Asteroid>()
-
     //Time complexity of BIG O of (N*K)
     for (date in dates) {
         val h = mapOf<String, Any>()
@@ -80,9 +80,17 @@ fun getElementFromJsonArray(jsonElement: JSONObject): Map<String, Any> {
     jsonElementMap.put(IS_POTENTIALLY_HAZARDOUS_ASTEROID, jsonElement.getString(IS_POTENTIALLY_HAZARDOUS_ASTEROID).toBoolean() )
     jsonElementMap.put(ESTIMATED_DIAMETERS, estimatedMax(jsonElement.getJSONObject(ESTIMATED_DIAMETERS) ))
     jsonElementMap.put(CLOSE_APPROACH_DATA,createClosedApproachData(jsonElement.getJSONArray(CLOSE_APPROACH_DATA)) )
-
     return jsonElementMap
 }
+
+fun getAsteroidsFromApi(startDate: String, endDate:String, callBackResponse: MutableLiveData<Response<String>>){
+    NasaApi.retrofitService.getAsteroids(startDate, endDate).enqueue(object : Callback<String> {
+        override fun onResponse(call: Call<String>, response: Response<String>) { callBackResponse.value = response }
+        override fun onFailure(call: Call<String>, t: Throwable) {} })
+}
+
+
+
 
 
 //request the image of the day from Nasa web service

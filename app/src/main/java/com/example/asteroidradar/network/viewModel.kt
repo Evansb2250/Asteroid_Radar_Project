@@ -1,20 +1,19 @@
 package com.example.asteroidradar.network
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.asteroidradar.*
 import org.json.JSONObject
 import org.json.JSONTokener
-import retrofit2.Call
-import retrofit2.Callback
 
 import retrofit2.Response
 
 
 
 class viewModel : ViewModel() {
+    private val _apiCallBack = MutableLiveData<Response<String>>()
+    val apiCalback : LiveData<Response<String>> get()= _apiCallBack
 
     //variable used to parse the string value into an object
     private val _neoNasaObject = MutableLiveData<MutableList<Asteroid>>()
@@ -27,7 +26,6 @@ class viewModel : ViewModel() {
 
     //Function I am having trouble with I am trying to convert the json into an object
    private fun createObjectsFromJsonString(response: Response<String>) {
-
         //TODO add ViewModelScope
         val jsonObject = JSONTokener(response.body()).nextValue() as JSONObject
         val nearEarthJsonObject = jsonObject.getJSONObject("near_earth_objects")
@@ -36,26 +34,16 @@ class viewModel : ViewModel() {
 
 
     //TODO add a filter to the apiCall parameter
-    fun apiCall(response: Response<String>) {
+    fun apiCall() {
         //TODO set a when  operator
-        Log.i("APICALL", response.toString())
-         response?.let {  createObjectsFromJsonString(response!!)}
+        getAsteroidsFromApi(startDate, endDate, _apiCallBack)
     }
 
 
-
-    //request the nested Json file from the Nasa web service
-    fun getAsteroidsFromApi(startDate: String, endDate:String){
-        var result: Response<String>? = null
-        val lock = true
-
-        NasaApi.retrofitService.getAsteroids(startDate, endDate).enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                result = response
-                apiCall(result!!)
-            }
-            override fun onFailure(call: Call<String>, t: Throwable) {} })
+    fun callBackReceived(callback: Response<String>){
+        callback?.let {  createObjectsFromJsonString(callback!!)}
     }
+
 
 
     init {
