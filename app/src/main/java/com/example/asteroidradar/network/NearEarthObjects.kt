@@ -13,3 +13,15 @@ data class DataTransferObject(
     val astronomical: Double? = -1.0
 )
 
+
+//
+//@Serializable
+//data class ImageOfTheDayTransferObject(
+//    val url:String,
+//    @SerialName() val mediaType: String,
+//    val title:String
+//)
+
+
+
+

@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val viewModel = ViewModelProvider(this).get(viewModel::class.java)
-        viewModel.apiCalback.observe(this, { response -> viewModel.callBackReceived(response)})
+
         viewModel.neoNasaObject.observe(this, { list -> Toast.makeText(this, "received list ", Toast.LENGTH_SHORT).show()})
 
         viewModel.apiCall()

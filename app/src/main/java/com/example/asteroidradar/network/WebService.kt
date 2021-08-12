@@ -1,6 +1,10 @@
 package com.example.asteroidradar.network
 
+import android.content.Context
+import androidx.annotation.RestrictTo
 import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -9,11 +13,12 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.lang.Exception
 
 //"https://api.nasa.gov/neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=API_KEY
 
 
-private const val BASE_URL ="https://api.nasa.gov/"
+private const val BASE_URL = "https://api.nasa.gov/"
 private const val API_KEY = "YTP5ZlghZMp6TAxO4w6sIef1juEnEZvGSjY8hB0d"
 
 
@@ -27,15 +32,24 @@ private val retrofit = Retrofit.Builder()
 
 interface Webservice {
     @GET("planetary/apod?")
-    fun getImageOfTheDay(@Query("api_key") key:String = API_KEY): Call<String>
+    fun getImageOfTheDay(@Query("api_key") key: String = API_KEY): Call<String>
 
     // neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=API_KEY
     @GET("neo/rest/v1/feed?")
-    fun getAsteroids(
+    suspend fun getAsteroids(
         @Query("start_date") startDate: String,
         @Query("end_date") endDate: String,
-        @Query("api_key") key:String = API_KEY
-    ): Call<String>
+        @Query("api_key") key: String = API_KEY
+    ): String
+
+
+    // neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=API_KEY
+    @GET("neo/rest/v1/feed?")
+    suspend fun getProperties(
+        @Query("start_date") startDate: String,
+        @Query("end_date") endDate: String,
+        @Query("api_key") key: String = API_KEY
+    ): String
 
 }
 
@@ -47,19 +61,18 @@ object NasaApi {
 }
 
 
-
-
-fun getAsteroidsFromApi(
+suspend fun getAsteroidsFromApi(
     startDate: String,
-    endDate: String,
-    callBackResponse: MutableLiveData<Response<String>>
-) {
-    NasaApi.retrofitService.getAsteroids(startDate, endDate).enqueue(object : Callback<String> {
-        override fun onResponse(call: Call<String>, response: Response<String>) {
-            callBackResponse.value = response
-        }
-        override fun onFailure(call: Call<String>, t: Throwable) {}
-    })
+    endDate: String
+): String? {
+
+    try {
+        return NasaApi.retrofitService.getProperties(startDate, endDate)
+    } catch (e: Exception) {
+
+    }
+    return null
+
 }
 
 
