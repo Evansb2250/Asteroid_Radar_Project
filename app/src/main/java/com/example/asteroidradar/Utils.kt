@@ -13,10 +13,7 @@ import retrofit2.Response
 Takes a list of dates  and the beginning location of the JSON ELEMENT
 Cycles through the dates in the Json and creates a list Asteroids based on the API call response
  */
-fun jsonParser(
-    dates: List<String>,
-    jsonObject: JSONObject
-): ArrayList<DataTransferObject>? {
+fun jsonParser(dates: List<String>, jsonObject: JSONObject): ArrayList<DataTransferObject>? {
     val listOfAsteroids = ArrayList<DataTransferObject>()
     //Time complexity of BIG O of (N*K)
     for (date in dates) {
