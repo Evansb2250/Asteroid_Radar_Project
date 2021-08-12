@@ -3,6 +3,7 @@ package com.example.asteroidradar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.asteroidradar.network.viewModel
 
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel = ViewModelProvider(this).get(viewModel::class.java)
         viewModel.apiCalback.observe(this, { response -> viewModel.callBackReceived(response)})
-
+        viewModel.neoNasaObject.observe(this, { list -> Toast.makeText(this, "received list ", Toast.LENGTH_SHORT).show()})
 
         viewModel.apiCall()
     }

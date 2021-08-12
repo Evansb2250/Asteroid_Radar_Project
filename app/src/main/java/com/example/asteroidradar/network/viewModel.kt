@@ -16,8 +16,8 @@ class viewModel : ViewModel() {
     val apiCalback : LiveData<Response<String>> get()= _apiCallBack
 
     //variable used to parse the string value into an object
-    private val _neoNasaObject = MutableLiveData<MutableList<Asteroid>>()
-    val neoNasaObject: LiveData<MutableList<Asteroid>> get() = _neoNasaObject
+    private val _neoNasaObject = MutableLiveData<MutableList<DataTransferObject>>()
+    val neoNasaObject: LiveData<MutableList<DataTransferObject>> get() = _neoNasaObject
 
     //Fixed date range to experiment using api calls
     val startDate = "2019-09-08"
@@ -29,7 +29,8 @@ class viewModel : ViewModel() {
         //TODO add ViewModelScope
         val jsonObject = JSONTokener(response.body()).nextValue() as JSONObject
         val nearEarthJsonObject = jsonObject.getJSONObject("near_earth_objects")
-        _neoNasaObject.value =  allocateJsonByDate(dates, nearEarthJsonObject)
+       // _neoNasaObject.value =  allocateJsonByDate(dates, nearEarthJsonObject)
+        _neoNasaObject.value = jsonParser(dates, nearEarthJsonObject)
     }
 
 
