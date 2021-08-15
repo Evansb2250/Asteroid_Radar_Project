@@ -1,5 +1,7 @@
 package com.example.asteroidradar.network
 
+import com.example.asteroidradar.DATEFORMAT
+import com.example.asteroidradar.database.DatabaseAsteroid
 import kotlinx.serialization.*
 
 
@@ -15,7 +17,19 @@ data class AsteroidDTO(
 )
 
 
-
+fun ArrayList<AsteroidDTO>.toDatabaseDomain():List<DatabaseAsteroid>{
+    return map {
+        DatabaseAsteroid(
+            id = it.id,
+            absolute_magnitude = it.absoluteMagnitude,
+            estimated_diameter_max = it.estimatedDiameterMax,
+            hazardous = it.isHazardous,
+            approach_date = DATEFORMAT.parse(it.approachDate).time,
+            kilometers_per_second = it.kilometersPerSecond,
+            astronomical_value = it.astronomical
+        )
+    }
+}
 
 
 

@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.asteroidradar.database.DatabaseAsteroid
 import com.example.asteroidradar.network.*
 import org.json.JSONObject
+import org.json.JSONTokener
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -14,8 +15,12 @@ Cycles through the dates in the Json and creates a list Asteroids based on the A
  */
 
 
-suspend fun jsonParser(jsonObject: JSONObject): ArrayList<AsteroidDTO> {
+suspend fun jsonParser(): ArrayList<AsteroidDTO> {
+    val response = getAsteroidsFromApi()
     val listOfAsteroids = ArrayList<AsteroidDTO>()
+    response?.let {
+        var jsonObject = JSONTokener(response).nextValue() as JSONObject
+            jsonObject = jsonObject.getJSONObject("near_earth_objects")
     //Time complexity of BIG O of (N*K)
     val dates = returnWeekAsArray()
     for (date in dates) {
@@ -24,21 +29,18 @@ suspend fun jsonParser(jsonObject: JSONObject): ArrayList<AsteroidDTO> {
             val transferObject = AsteroidDTO(
                 jsonArray.getJSONObject(i).getString(JSON_ELEMENT_ID).toLong(),
                 jsonArray.getJSONObject(i).getString(ABSOLUTE_MAGNITUDE).toDouble(),
-                jsonArray.getJSONObject(i).getJSONObject(ESTIMATED_DIAMETERS)
-                    .getJSONObject(KILOMETERS).getString(ESTIMATED_DIAMETER_MAX).toDouble(),
+                jsonArray.getJSONObject(i).getJSONObject(ESTIMATED_DIAMETERS).getJSONObject(KILOMETERS).getString(ESTIMATED_DIAMETER_MAX).toDouble(),
                 jsonArray.getJSONObject(i).getString(IS_POTENTIALLY_HAZARDOUS_ASTEROID).toBoolean(),
-                jsonArray.getJSONObject(i).getJSONArray(CLOSE_APPROACH_DATA).getJSONObject(0)
-                    .getString(CLOSE_APPROACH_DATE),
-                jsonArray.getJSONObject(i).getJSONArray(CLOSE_APPROACH_DATA).getJSONObject(0)
-                    .getJSONObject(RELATIVEVELOCITY).getString(KILOMETERS_PER_SECOND).toDouble(),
-                jsonArray.getJSONObject(i).getJSONArray(CLOSE_APPROACH_DATA).getJSONObject(0)
-                    .getJSONObject(MISS_DISTANCE).getString(ASTRONOMICAL).toDouble()
+                jsonArray.getJSONObject(i).getJSONArray(CLOSE_APPROACH_DATA).getJSONObject(0).getString(CLOSE_APPROACH_DATE),
+                jsonArray.getJSONObject(i).getJSONArray(CLOSE_APPROACH_DATA).getJSONObject(0).getJSONObject(RELATIVEVELOCITY).getString(KILOMETERS_PER_SECOND).toDouble(),
+                jsonArray.getJSONObject(i).getJSONArray(CLOSE_APPROACH_DATA).getJSONObject(0).getJSONObject(MISS_DISTANCE).getString(ASTRONOMICAL).toDouble()
             )
             listOfAsteroids.add(transferObject)
             Log.i("PARSE RESULT", transferObject.toString() )
         }
     }
     Log.i("PARSE RESULT", listOfAsteroids.size.toString() )
+    }
     return listOfAsteroids
 }
 

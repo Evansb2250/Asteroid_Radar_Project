@@ -9,7 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 @RunWith(AndroidJUnit4::class)
-class viewModelTest : TestCase(){
+class astroidViewModelTest : TestCase(){
     @Test
     fun testAPICALL(){
 
