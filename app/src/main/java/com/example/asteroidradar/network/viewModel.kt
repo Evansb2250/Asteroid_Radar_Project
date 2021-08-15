@@ -25,7 +25,6 @@ class viewModel : ViewModel() {
         //Add this to a repository class
        viewModelScope.launch {
            val response = getAsteroidsFromApi()
-
            response?.let {
                val jsonObject = JSONTokener(response).nextValue() as JSONObject
                val nearEarthJsonObject = jsonObject.getJSONObject("near_earth_objects")
