@@ -1,6 +1,5 @@
 package com.example.asteroidradar.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -9,21 +8,21 @@ interface AsteroidDao {
 
     //Insert a list of asteroids, onConflict strategy is set to replace duplicate id's
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAsteroid(asteroids: Asteroid)
+    suspend fun insertAsteroid(asteroids: DatabaseAsteroid)
 
     //Insert a list of asteroids, onConflict strategy is set to replace duplicate id's
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllAsteroids(asteroids: List<Asteroid>)
+    suspend fun insertAllAsteroids(databaseAsteroids: List<DatabaseAsteroid>)
 
 
     //retrieves a specific asteroid
     @Query("Select * From asteroids_table Where id =:key")
-    suspend fun getAsteroid(key: Int): Asteroid?
+    suspend fun getAsteroid(key: Int): DatabaseAsteroid?
 
 
     //Updates the state of the asteroids
     @Update
-    suspend fun update(asteroids: List<Asteroid>)
+    suspend fun update(databaseAsteroids: List<DatabaseAsteroid>)
 
 
     //removes all the rows from the Asteroid table

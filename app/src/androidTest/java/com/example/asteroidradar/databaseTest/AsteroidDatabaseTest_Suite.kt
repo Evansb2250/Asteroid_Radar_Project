@@ -4,8 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import com.example.asteroidradar.database.Asteroid
+import com.example.asteroidradar.database.DatabaseAsteroid
 import com.example.asteroidradar.database.AsteroidDao
 import com.example.asteroidradar.database.AsteroidDatabase
 import junit.framework.Assert.assertEquals
@@ -17,7 +16,7 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class AsteroidDatabaseTest {
+class DatabaseAsteroidDatabaseTest {
     private lateinit var asteroidDao: AsteroidDao
     private lateinit var db: AsteroidDatabase
 
@@ -60,7 +59,7 @@ class AsteroidDatabaseTest {
         runBlocking { asteroidDao.insertAsteroid(asteroid) }
 
         //result
-        var result: Asteroid? = null
+        var result: DatabaseAsteroid? = null
 
         // run database request inside coroutineScope
         runBlocking { result = asteroidDao.getAsteroid(1) }

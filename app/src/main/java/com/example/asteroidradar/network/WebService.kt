@@ -1,10 +1,8 @@
 package com.example.asteroidradar.network
 
-import android.content.Context
-import androidx.annotation.RestrictTo
-import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import com.example.asteroidradar.BACK_DATE
+import com.example.asteroidradar.CURRENT_DATE
+import com.example.asteroidradar.DATEFORMAT
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,8 +12,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.lang.Exception
-
-//"https://api.nasa.gov/neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=API_KEY
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 
 private const val BASE_URL = "https://api.nasa.gov/"
@@ -31,7 +30,7 @@ private val retrofit = Retrofit.Builder()
 
 
 interface Webservice {
-    @GET("planetary/apod?")
+    @GET("planetary/apod")
     fun getImageOfTheDay(@Query("api_key") key: String = API_KEY): Call<String>
 
     // neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=API_KEY
@@ -44,7 +43,7 @@ interface Webservice {
 
 
     // neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=API_KEY
-    @GET("neo/rest/v1/feed?")
+    @GET("neo/rest/v1/feed")
     suspend fun getProperties(
         @Query("start_date") startDate: String,
         @Query("end_date") endDate: String,
@@ -61,13 +60,11 @@ object NasaApi {
 }
 
 
-suspend fun getAsteroidsFromApi(
-    startDate: String,
-    endDate: String
-): String? {
+suspend fun getAsteroidsFromApi(): String? {
 
     try {
-        return NasaApi.retrofitService.getProperties(startDate, endDate)
+        val dates = calculateWeekSevenDaysOut()
+        return NasaApi.retrofitService.getProperties(dates.get(BACK_DATE)!!,dates.get(CURRENT_DATE)!!)
     } catch (e: Exception) {
 
     }
@@ -75,6 +72,14 @@ suspend fun getAsteroidsFromApi(
 
 }
 
+
+fun calculateWeekSevenDaysOut(): HashMap<String, String> =
+    HashMap<String, String>().apply {
+        val last7days = Calendar.getInstance().apply { add(Calendar.DATE, -7) }.timeInMillis
+        put(BACK_DATE, DATEFORMAT.format(last7days))
+        val today = Calendar.getInstance().timeInMillis
+        put(CURRENT_DATE, DATEFORMAT.format(today))
+    }
 
 //request the image of the day from Nasa web service
 fun getImageFromApi(): Response<String>? {
@@ -89,5 +94,6 @@ fun getImageFromApi(): Response<String>? {
     })
     return result
 }
+
 
 

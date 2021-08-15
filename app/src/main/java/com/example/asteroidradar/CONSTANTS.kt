@@ -1,6 +1,10 @@
 package com.example.asteroidradar
 
+import java.text.SimpleDateFormat
 
+val BACK_DATE ="BackDate"
+val CURRENT_DATE="CurrentDate"
+val DATEFORMAT = SimpleDateFormat("yyyy-MM-dd")
 val CLOSE_APPROACH_DATE = "close_approach_date"
 val RELATIVEVELOCITY = "relative_velocity"
 val KILOMETERS_PER_SECOND = "kilometers_per_second"

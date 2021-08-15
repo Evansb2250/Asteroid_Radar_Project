@@ -1,7 +1,6 @@
 package com.example.asteroidradar.networkTest
 
-import androidx.test.espresso.matcher.ViewMatchers.assertThat
-import com.example.asteroidradar.database.Asteroid
+import com.example.asteroidradar.database.DatabaseAsteroid
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import java.io.IOException
@@ -16,7 +15,7 @@ class NetworkTest_Suite {
     @Test
     fun httpRequestAsteroids_testSize_greaterThanZero() {
         //request data
-        val result: List<Asteroid>? = null
+        val result: List<DatabaseAsteroid>? = null
 
         assertEquals(false, result?.isEmpty())
     }
@@ -26,7 +25,7 @@ class NetworkTest_Suite {
     @Test
     fun httpRequestAsteroids_testSize_failedRequest() {
         //request data
-        val result: List<Asteroid>? = null
+        val result: List<DatabaseAsteroid>? = null
 
         assertEquals(false, result?.isEmpty())
     }
@@ -36,7 +35,7 @@ class NetworkTest_Suite {
     @Test
     fun httpRequestImageOfTheDay_notNull() {
         //request data
-        val result: List<Asteroid>? = null
+        val result: List<DatabaseAsteroid>? = null
 
         assertEquals(false, result?.isEmpty())
     }
@@ -47,7 +46,7 @@ class NetworkTest_Suite {
     @Throws(IOException::class)
     fun httpRequestImageOfTheDay_failedRequest() {
         //request data
-        val result: List<Asteroid>? = null
+        val result: List<DatabaseAsteroid>? = null
 
         assertEquals(false, result?.isEmpty())
     }

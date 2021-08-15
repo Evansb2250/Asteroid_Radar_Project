@@ -3,10 +3,11 @@ package com.example.asteroidradar.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.asteroidradar.domain.Asteroid
 
 
 @Entity(tableName = "Asteroids_table")
-data class Asteroid(
+data class DatabaseAsteroid(
     @PrimaryKey(autoGenerate = false)
     var id: Long= 0L,
     var approach_date: Long = 0L,

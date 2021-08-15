@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 //creates a database object
-@Database(entities = arrayOf(Asteroid::class),version= 1, exportSchema = false)
+@Database(entities = arrayOf(DatabaseAsteroid::class),version= 1, exportSchema = false)
 abstract class AsteroidDatabase: RoomDatabase(){
 
     //saves instance of the database

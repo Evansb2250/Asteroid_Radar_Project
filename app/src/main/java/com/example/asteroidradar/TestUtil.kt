@@ -1,9 +1,6 @@
 package com.example.asteroidradar
 
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
-import com.example.asteroidradar.database.Asteroid
-import org.json.JSONObject
+import com.example.asteroidradar.database.DatabaseAsteroid
 
 
 class TestUtil {
@@ -17,9 +14,9 @@ class TestUtil {
             hazardous: Boolean,
             kilometers_per_second: Double,
             astronomical_value: Double
-        ): Asteroid {
+        ): DatabaseAsteroid {
 
-            return Asteroid(
+            return DatabaseAsteroid(
                 id,
                 approach_date,
                 absolute_magnitude,
