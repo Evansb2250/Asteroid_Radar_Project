@@ -1,5 +1,6 @@
 package com.example.asteroidradar.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -16,8 +17,8 @@ interface AsteroidDao {
 
 
     //retrieves a specific asteroid
-    @Query("Select * From asteroids_table Where id =:key")
-    suspend fun getAsteroid(key: Int): DatabaseAsteroid?
+    @Query("Select * From asteroids_table")
+     fun getAsteroid(): LiveData<List<DatabaseAsteroid>>
 
 
     //Updates the state of the asteroids

@@ -1,13 +1,11 @@
 package com.example.asteroidradar
 
 import android.util.Log
-import com.example.asteroidradar.database.DatabaseAsteroid
-import com.example.asteroidradar.network.*
+import com.example.asteroidradar.network.AsteroidDTO
+import com.example.asteroidradar.network.getAsteroidsFromApi
 import org.json.JSONObject
-import org.json.JSONTokener
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 /*
 Takes a list of dates  and the beginning location of the JSON ELEMENT
@@ -15,12 +13,10 @@ Cycles through the dates in the Json and creates a list Asteroids based on the A
  */
 
 
-suspend fun jsonParser(): ArrayList<AsteroidDTO> {
+suspend fun jsonParser(jstokenAsObject: JSONObject): ArrayList<AsteroidDTO> {
     val response = getAsteroidsFromApi()
     val listOfAsteroids = ArrayList<AsteroidDTO>()
-    response?.let {
-        var jsonObject = JSONTokener(response).nextValue() as JSONObject
-            jsonObject = jsonObject.getJSONObject("near_earth_objects")
+    val jsonObject = jstokenAsObject.getJSONObject("near_earth_objects")
     //Time complexity of BIG O of (N*K)
     val dates = returnWeekAsArray()
     for (date in dates) {
@@ -36,11 +32,12 @@ suspend fun jsonParser(): ArrayList<AsteroidDTO> {
                 jsonArray.getJSONObject(i).getJSONArray(CLOSE_APPROACH_DATA).getJSONObject(0).getJSONObject(MISS_DISTANCE).getString(ASTRONOMICAL).toDouble()
             )
             listOfAsteroids.add(transferObject)
-            Log.i("PARSE RESULT", transferObject.toString() )
+            Log.i(DEBUG_LOG, transferObject.toString() )
+
         }
     }
-    Log.i("PARSE RESULT", listOfAsteroids.size.toString() )
-    }
+    Log.i(DEBUG_LOG, listOfAsteroids.size.toString() )
+
     return listOfAsteroids
 }
 

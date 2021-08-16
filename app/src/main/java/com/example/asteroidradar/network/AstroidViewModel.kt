@@ -1,8 +1,11 @@
 package com.example.asteroidradar.network
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.asteroidradar.DEBUG_LOG
 import com.example.asteroidradar.database.getDatabase
+import com.example.asteroidradar.domain.Asteroid
 import com.example.asteroidradar.repository.Repository
 import kotlinx.coroutines.launch
 
@@ -12,26 +15,23 @@ class AstroidViewModel( application : Application) : AndroidViewModel(applicatio
       val repository = Repository(database)
 
     //variable used to parse the string value into an object
-    private val _neoNasaObject = MutableLiveData<MutableList<AsteroidDTO>>()
-    val neoNasaObject: LiveData<MutableList<AsteroidDTO>> get() = _neoNasaObject
+    val neoNasaObject: LiveData<List<Asteroid>> get() = repository.asteroids
+
+
+
 
     //Fixed date range to experiment using api calls
 
-    //TODO add a filter to the apiCall parameter
-    fun apiCall() {
-        //Add this to a repository class
+    init {
 
         viewModelScope.launch {
-           repository.refreshAsteroidsFromNetwork()
-      }
-
-    }
-
-    init {
-        apiCall()
+            Log.i(DEBUG_LOG, "requesting data")
+            repository.refreshAsteroidsFromNetwork()
+        }
     }
 
 }
+
 
 
 class viewModelFactor(val application: Application):ViewModelProvider.Factory{

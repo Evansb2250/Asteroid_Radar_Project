@@ -38,6 +38,10 @@ dependencies {
     //Kotlin version
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
+    // WorkManager dependency
+    def work_version = "2.6.0-rc01"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+
     //CoreKtx
     implementation "androidx.core:core-ktx:$version_coreKtx"
 
@@ -52,8 +56,9 @@ dependencies {
 
     // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:$version_room"
-
     annotationProcessor "androidx.room:room-compiler:$version_room"
+
+
     // To use Kotlin annotation processing tool (kapt)
     kapt "androidx.room:room-compiler:$version_room"
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
@@ -101,4 +106,7 @@ dependencies {
 
     //GSON
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
+
+
+
 }

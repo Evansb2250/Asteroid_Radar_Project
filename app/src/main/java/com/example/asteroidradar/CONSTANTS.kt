@@ -1,7 +1,7 @@
 package com.example.asteroidradar
 
 import java.text.SimpleDateFormat
-
+val DEBUG_LOG = "DEBBUGGER"
 val BACK_DATE ="BackDate"
 val CURRENT_DATE="CurrentDate"
 val DATEFORMAT = SimpleDateFormat("yyyy-MM-dd")

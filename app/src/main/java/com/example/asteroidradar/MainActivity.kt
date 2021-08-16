@@ -1,9 +1,9 @@
 package com.example.asteroidradar
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.asteroidradar.network.AstroidViewModel
 import com.example.asteroidradar.network.viewModelFactor
@@ -22,12 +22,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setContentView(R.layout.activity_main)
+        var vm:AstroidViewModel
+        var fact = viewModelFactor(this.application)
+        vm = ViewModelProvider(this, fact).get(AstroidViewModel::class.java)
 
-
-        viewModel.apiCall()
+        vm.neoNasaObject.observe(this, Observer {
+            Toast.makeText(this, "object received ${it.size}", Toast.LENGTH_LONG).show()
+        })
     }
 
 

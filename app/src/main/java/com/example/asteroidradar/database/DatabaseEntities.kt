@@ -1,6 +1,5 @@
 package com.example.asteroidradar.database
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.asteroidradar.domain.Asteroid
@@ -16,6 +15,22 @@ data class DatabaseAsteroid(
     var hazardous: Boolean = false,
     var kilometers_per_second:Double = 0.0,
     var astronomical_value:Double= 0.0)
+
+fun List<DatabaseAsteroid>.asDomainModel():List<Asteroid>{
+    return map {
+
+        Asteroid(
+            id = it.id,
+            approachDate = it.approach_date.toString(),
+            absoluteMagnitude = it.absolute_magnitude,
+            estimatedDiameterMax = it.estimated_diameter_max,
+            isHazardous = it.hazardous,
+            kilometersPerSecond = it.kilometers_per_second,
+            astronomical = it.astronomical_value
+            )
+    }
+}
+
 
 
 @Entity(tableName = "ImageOfTheDay_table")
