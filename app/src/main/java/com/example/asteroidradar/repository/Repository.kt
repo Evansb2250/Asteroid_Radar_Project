@@ -18,31 +18,29 @@ import retrofit2.HttpException
 
 class Repository(val database: AsteroidDatabase) {
 
-    val asteroids: LiveData<List<Asteroid>> = Transformations.map(database.asteroidDao().getAsteroid()){
-        it.asDomainModel()
-    }
+    val asteroids: LiveData<List<Asteroid>> = Transformations.map(database.asteroidDao().getAsteroid()) {
+            it.asDomainModel()
+        }
 
     suspend fun refreshAsteroidsFromNetwork() {
         Log.i(DEBUG_LOG, " in the refreshAsteroid")
         //use a network call to gather information from the api
-        withContext(Dispatchers.IO){
-              getJSonObject().let {
-                 database.asteroidDao().insertAllAsteroids(jsonParser(it!!).toDatabaseDomain())
-              }
+        withContext(Dispatchers.IO) {
+            getJSonObject()?.let {
+                    database.asteroidDao().insertAllAsteroids(jsonParser(it).toDatabaseDomain())
             }
         }
     }
+}
 
 
+suspend fun getJSonObject(): JSONObject? {
+    try {
+         getAsteroidsFromApi()?.let {
+             return JSONTokener(it).nextValue() as JSONObject
+         }
+    } catch (e: HttpException) {
 
-        suspend fun getJSonObject():JSONObject? {
-            var response:String? = null
-            Log.i(DEBUG_LOG, " in the getJsonObject fun")
-                try {
-                    response = getAsteroidsFromApi()
-                } catch (e: HttpException) {
-
-                }
-
-            return JSONTokener(response).nextValue() as JSONObject
-        }
+    }
+    return null
+}

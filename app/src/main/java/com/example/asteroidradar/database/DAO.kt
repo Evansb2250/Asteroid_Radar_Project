@@ -17,7 +17,7 @@ interface AsteroidDao {
 
 
     //retrieves a specific asteroid
-    @Query("Select * From asteroids_table")
+    @Query("Select * From asteroids_table Order by approach_date DESC")
      fun getAsteroid(): LiveData<List<DatabaseAsteroid>>
 
 

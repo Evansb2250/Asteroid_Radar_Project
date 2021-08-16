@@ -2,7 +2,9 @@ package com.example.asteroidradar.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.asteroidradar.DATEFORMAT
 import com.example.asteroidradar.domain.Asteroid
+import java.util.*
 
 
 @Entity(tableName = "Asteroids_table")
@@ -21,7 +23,7 @@ fun List<DatabaseAsteroid>.asDomainModel():List<Asteroid>{
 
         Asteroid(
             id = it.id,
-            approachDate = it.approach_date.toString(),
+            approachDate = DATEFORMAT.format(Date(it.approach_date)),
             absoluteMagnitude = it.absolute_magnitude,
             estimatedDiameterMax = it.estimated_diameter_max,
             isHazardous = it.hazardous,
