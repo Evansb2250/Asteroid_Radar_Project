@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/astroid_Fragment">
+
+    <fragment
+        android:id="@+id/astroid_Fragment"
+        android:name="com.example.asteroidradar.Astroid_Fragment"
+        android:label="fragment_astroid_"
+        tools:layout="@layout/fragment_astroid_" />
+</navigation>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AsteroidRadar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="PlaceHolderText">TextView</string>
+    <string name="emoji_details_content_description">expresses if the astroid is hazardous</string>
 </resources>
