@@ -12,8 +12,7 @@ Cycles through the dates in the Json and creates a list Asteroids based on the A
  */
 
 
- fun jsonParser(jstokenAsObject: JSONObject): ArrayList<AsteroidDTO> {
-
+ suspend fun jsonParser(jstokenAsObject: JSONObject): ArrayList<AsteroidDTO> {
     val listOfAsteroids = ArrayList<AsteroidDTO>()
     val jsonObject = jstokenAsObject.getJSONObject("near_earth_objects")
 
@@ -47,7 +46,6 @@ Cycles through the dates in the Json and creates a list Asteroids based on the A
 
 
 fun returnWeekAsArray(): java.util.ArrayList<String> {
-
     val calendar = Calendar.getInstance()
     return java.util.ArrayList<String>().apply {
         for (i in 1..7) {

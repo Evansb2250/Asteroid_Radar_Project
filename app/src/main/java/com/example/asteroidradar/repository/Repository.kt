@@ -22,6 +22,7 @@ class Repository(val database: AsteroidDatabase) {
             it.asDomainModel()
         }
 
+
     suspend fun refreshAsteroidsFromNetwork() {
         Log.i(DEBUG_LOG, " in the refreshAsteroid")
         //use a network call to gather information from the api

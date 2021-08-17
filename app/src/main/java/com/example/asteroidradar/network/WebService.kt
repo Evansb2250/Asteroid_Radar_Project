@@ -9,10 +9,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
-import java.lang.Exception
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -81,6 +78,9 @@ fun calculateWeekSevenDaysOut(): HashMap<String, String> =
         put(CURRENT_DATE, DATEFORMAT.format(today))
     }
 
+
+
+
 //request the image of the day from Nasa web service
 fun getImageFromApi(): Response<String>? {
     var result: Response<String>? = null
@@ -89,7 +89,6 @@ fun getImageFromApi(): Response<String>? {
         override fun onResponse(call: Call<String>, response: Response<String>) {
             result = response
         }
-
         override fun onFailure(call: Call<String>, t: Throwable) {}
     })
     return result
