@@ -38,7 +38,7 @@ class AstroidAdapter(val clickListener: AstroidListener) :
                 }
             )
             binding.executePendingBindings()
-
+            emojiImageView.context
         }
     }
 
@@ -81,7 +81,7 @@ class AsteroidDiffCallback:DiffUtil.ItemCallback<Asteroid>(){
 
 
 
-class AstroidListener(val clickListener: (astroid:Long) -> Unit){
+class AstroidListener(val clickListener: (astroid:Asteroid) -> Unit){
     //Attaches click listener function to onClick function
-        fun onClick(astroidId: Asteroid) = astroidId.id?.let { clickListener(it) }
+        fun onClick(astroidId: Asteroid) = astroidId.id?.let { clickListener(astroidId) }
 }

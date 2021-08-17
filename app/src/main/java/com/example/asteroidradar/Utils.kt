@@ -1,7 +1,10 @@
 package com.example.asteroidradar
 
 import android.util.Log
+import com.example.asteroidradar.database.DatabaseImageOfTheDay
+import com.example.asteroidradar.domain.ImageOfTheDay
 import com.example.asteroidradar.network.AsteroidDTO
+import com.example.asteroidradar.network.ImageOfTheDayDTO
 import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
@@ -56,5 +59,22 @@ fun returnWeekAsArray(): java.util.ArrayList<String> {
 }
 
 
+fun ImagetoDatabaseModel(imageOfTheDay: ImageOfTheDayDTO): DatabaseImageOfTheDay {
+    return DatabaseImageOfTheDay(
+        mediaType = imageOfTheDay.mediaType,
+        title = imageOfTheDay.title,
+        explanation = imageOfTheDay.explanation,
+        date = DATEFORMAT.parse(imageOfTheDay.date).time,
+        url = imageOfTheDay.url
+    )
+}
 
-
+fun ImageDatabaseModelToDomain(imageOfTheDay: DatabaseImageOfTheDay): ImageOfTheDay {
+    return ImageOfTheDay(
+        mediaType = imageOfTheDay.mediaType,
+        title = imageOfTheDay.title,
+        explanation = imageOfTheDay.explanation,
+        date = DATEFORMAT.format(imageOfTheDay.date),
+        url = imageOfTheDay.url
+    )
+}

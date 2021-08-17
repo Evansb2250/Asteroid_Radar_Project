@@ -1,11 +1,12 @@
 package com.example.asteroidradar.network
 
+import android.util.Log
 import com.example.asteroidradar.BACK_DATE
 import com.example.asteroidradar.CURRENT_DATE
 import com.example.asteroidradar.DATEFORMAT
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.asteroidradar.DEBUG_LOG
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
@@ -17,21 +18,29 @@ import kotlin.collections.HashMap
 private const val BASE_URL = "https://api.nasa.gov/"
 private const val API_KEY = "YTP5ZlghZMp6TAxO4w6sIef1juEnEZvGSjY8hB0d"
 
+//
+//private val moshi = Moshi.Builder()
+//    .add(KotlinJsonAdapterFactory())
+//    .build()
+
 
 private val retrofit = Retrofit.Builder()
     //tells retrofit what to do with the data
     // ScalarsConverterFactory turns the JSON file to a String
     .addConverterFactory(ScalarsConverterFactory.create())
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
     .build()
 
 
+
+
 interface Webservice {
     @GET("planetary/apod")
-    fun getImageOfTheDay(@Query("api_key") key: String = API_KEY): Call<String>
+   suspend fun getImageOfTheDay(@Query("api_key") key: String = API_KEY): String
 
     // neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=API_KEY
-    @GET("neo/rest/v1/feed?")
+    @GET("neo/rest/v1/feed")
     suspend fun getAsteroids(
         @Query("start_date") startDate: String,
         @Query("end_date") endDate: String,
@@ -46,7 +55,6 @@ interface Webservice {
         @Query("end_date") endDate: String,
         @Query("api_key") key: String = API_KEY
     ): String
-
 }
 
 
@@ -82,16 +90,18 @@ fun calculateWeekSevenDaysOut(): HashMap<String, String> =
 
 
 //request the image of the day from Nasa web service
-fun getImageFromApi(): Response<String>? {
-    var result: Response<String>? = null
-    NasaApi.retrofitService.getImageOfTheDay().enqueue(object : Callback<String> {
-        //turn response into a string
-        override fun onResponse(call: Call<String>, response: Response<String>) {
-            result = response
+suspend fun getImageFromApi(): String? {
+
+        try{
+            val image = NasaApi.retrofitService.getImageOfTheDay()
+            Log.i(DEBUG_LOG, "IMAGE  ${image.toString()}")
+            return image
+        }catch(e: HttpException){
+
         }
-        override fun onFailure(call: Call<String>, t: Throwable) {}
-    })
-    return result
+
+
+    return null
 }
 
 

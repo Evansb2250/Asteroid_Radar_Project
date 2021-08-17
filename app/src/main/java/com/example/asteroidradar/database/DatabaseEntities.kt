@@ -36,9 +36,11 @@ fun List<DatabaseAsteroid>.asDomainModel():List<Asteroid>{
 
 
 @Entity(tableName = "ImageOfTheDay_table")
-data class ImageOfTheDay(
+data class DatabaseImageOfTheDay(
     @PrimaryKey
+    var date:Long,
     var url:String,
     var mediaType:String,
-    var title:String
+    var title:String,
+    var explanation:String,
 )

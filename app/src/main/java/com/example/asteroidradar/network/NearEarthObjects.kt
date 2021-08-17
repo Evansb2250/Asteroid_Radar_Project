@@ -2,6 +2,7 @@ package com.example.asteroidradar.network
 
 import com.example.asteroidradar.DATEFORMAT
 import com.example.asteroidradar.database.DatabaseAsteroid
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
@@ -35,11 +36,15 @@ fun ArrayList<AsteroidDTO>.toDatabaseDomain():List<DatabaseAsteroid>{
 
 //
 @Serializable
-data class ImageOfTheDayTransferObject(
-    val url:String,
-    val mediaType: String,
-    val title:String
+data class ImageOfTheDayDTO(
+    @SerialName("media_type")var mediaType:String,
+    @SerialName("title")var title:String,
+    @SerialName("explanation") var explanation:String,
+    @SerialName("date") var date:String,
+    @SerialName("url")var url:String,
 )
+
+
 
 
 
