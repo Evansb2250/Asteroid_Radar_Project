@@ -4,13 +4,14 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/35b89a7df077b7fd54f833295eaf549b/viewpager-1.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/db1051b25ad736d28b520158fa1cd9a2/viewpager-1.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9a7700e02c68dbeb7c4570dc7365744b/viewpager-1.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a117a91dec349ca7267b7a0b5dbb05ff/viewpager-1.0.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a117a91dec349ca7267b7a0b5dbb05ff/viewpager-1.0.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a117a91dec349ca7267b7a0b5dbb05ff/viewpager-1.0.0/res" />
+      <root url="file://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/a117a91dec349ca7267b7a0b5dbb05ff/viewpager-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/a117a91dec349ca7267b7a0b5dbb05ff/viewpager-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/a117a91dec349ca7267b7a0b5dbb05ff/viewpager-1.0.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.viewpager/viewpager/1.0.0/db045f92188b9d247d5f556866f8861ab68528f0/viewpager-1.0.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/modules-2/files-2.1/androidx.viewpager/viewpager/1.0.0/db045f92188b9d247d5f556866f8861ab68528f0/viewpager-1.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

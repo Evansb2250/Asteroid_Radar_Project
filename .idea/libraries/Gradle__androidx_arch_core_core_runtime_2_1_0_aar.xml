@@ -5,12 +5,13 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4220e25a325b787a08d3901557fc2aec/core-runtime-2.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30e955ad4eb36cdf5dd5375e95331e5d/core-runtime-2.1.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c1f9d040a33a0eb263163a91a5326493/core-runtime-2.1.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c1f9d040a33a0eb263163a91a5326493/core-runtime-2.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c1f9d040a33a0eb263163a91a5326493/core-runtime-2.1.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/c1f9d040a33a0eb263163a91a5326493/core-runtime-2.1.0/res" />
+      <root url="jar://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/c1f9d040a33a0eb263163a91a5326493/core-runtime-2.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/c1f9d040a33a0eb263163a91a5326493/core-runtime-2.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-runtime/2.1.0/f19886651c9946b39f83d8c184fd0e2ce9f43c16/core-runtime-2.1.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/modules-2/files-2.1/androidx.arch.core/core-runtime/2.1.0/f19886651c9946b39f83d8c184fd0e2ce9f43c16/core-runtime-2.1.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

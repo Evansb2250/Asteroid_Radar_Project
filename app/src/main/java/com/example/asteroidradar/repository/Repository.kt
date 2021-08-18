@@ -22,6 +22,7 @@ import kotlinx.serialization.json.Json
 import org.json.JSONObject
 import org.json.JSONTokener
 import retrofit2.HttpException
+import java.net.UnknownHostException
 
 class Repository(val database: AsteroidDatabase) {
 
@@ -34,8 +35,15 @@ class Repository(val database: AsteroidDatabase) {
 
 
     suspend fun refreshData(){
-        refreshAsteroidsFromNetwork()
-        refreshImageOfTheDay()
+        //e Unknown Host Exception prevents the app from crashing if there is no
+        // internet connection.
+        try{
+            refreshAsteroidsFromNetwork()
+            refreshImageOfTheDay()
+        }catch (e: UnknownHostException){
+
+        }
+
     }
 
 

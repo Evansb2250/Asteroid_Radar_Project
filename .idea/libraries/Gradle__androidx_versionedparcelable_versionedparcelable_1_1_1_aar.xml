@@ -4,13 +4,14 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6a605a23ec971aaf0adfa6c7baa84e76/versionedparcelable-1.1.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2b393b08103163ecf5b8f8b659f07d04/versionedparcelable-1.1.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6dc5a3ffd5787ae8229032704dcabf48/versionedparcelable-1.1.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/61682daa2a20b7e544c0c035225b2e85/versionedparcelable-1.1.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/61682daa2a20b7e544c0c035225b2e85/versionedparcelable-1.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/61682daa2a20b7e544c0c035225b2e85/versionedparcelable-1.1.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/61682daa2a20b7e544c0c035225b2e85/versionedparcelable-1.1.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/61682daa2a20b7e544c0c035225b2e85/versionedparcelable-1.1.1/res" />
+      <root url="jar://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/61682daa2a20b7e544c0c035225b2e85/versionedparcelable-1.1.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.versionedparcelable/versionedparcelable/1.1.1/d9085927216387af679d18b6f472bc0fc5c7cc81/versionedparcelable-1.1.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/modules-2/files-2.1/androidx.versionedparcelable/versionedparcelable/1.1.1/d9085927216387af679d18b6f472bc0fc5c7cc81/versionedparcelable-1.1.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

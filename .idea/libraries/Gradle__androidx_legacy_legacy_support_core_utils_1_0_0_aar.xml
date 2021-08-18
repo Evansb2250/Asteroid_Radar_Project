@@ -5,12 +5,13 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/513baac9a28ed668b839d2bbf35b77e8/legacy-support-core-utils-1.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e36fadcf9023f7bf92e5f50f2fbacc4b/legacy-support-core-utils-1.0.0/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a7b8c84f2cf312d1ca1bac63675c4418/legacy-support-core-utils-1.0.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a7b8c84f2cf312d1ca1bac63675c4418/legacy-support-core-utils-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a7b8c84f2cf312d1ca1bac63675c4418/legacy-support-core-utils-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/a7b8c84f2cf312d1ca1bac63675c4418/legacy-support-core-utils-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/a7b8c84f2cf312d1ca1bac63675c4418/legacy-support-core-utils-1.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/transforms-2/files-2.1/a7b8c84f2cf312d1ca1bac63675c4418/legacy-support-core-utils-1.0.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.legacy/legacy-support-core-utils/1.0.0/46c37f178088153618cfb0afef08ec96c48f93cb/legacy-support-core-utils-1.0.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/kotlin-coroutines-master/advanced-coroutines-codelab/.gradle/6.5/caches/modules-2/files-2.1/androidx.legacy/legacy-support-core-utils/1.0.0/46c37f178088153618cfb0afef08ec96c48f93cb/legacy-support-core-utils-1.0.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
