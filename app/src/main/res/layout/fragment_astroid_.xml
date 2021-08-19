@@ -5,11 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.Astroid_Fragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.asteroidradar.viewmodel.AstroidViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
        >
 
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="327dp"
+            android:layout_height="264dp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:imgUrl="@{viewModel.imageOfTheDayObject.url}"
+            android:contentDescription="@{viewModel.imageOfTheDayObject.explanation}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

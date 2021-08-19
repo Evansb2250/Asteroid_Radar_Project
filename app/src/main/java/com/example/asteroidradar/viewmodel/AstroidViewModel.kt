@@ -1,4 +1,4 @@
-package com.example.asteroidradar.network
+package com.example.asteroidradar.viewmodel
 
 import android.app.Application
 import android.util.Log
@@ -15,11 +15,12 @@ class AstroidViewModel(application: Application) : AndroidViewModel(application)
     private val database = getDatabase(application)
     private val repository = Repository(database)
 
+
     //variable used to parse the string value into an object
     val neoNasaObject: LiveData<List<Asteroid>> get() = repository.asteroids
 
-    //image of the day
-    val imageOfTheDay:LiveData<ImageOfTheDay?>get() = repository.imageOfTheDay
+    //image of the day Object
+    val imageOfTheDayObject:LiveData<ImageOfTheDay?>get() = repository.imageOfTheDay
 
 
     //variable of Asteroid selected
@@ -34,6 +35,7 @@ class AstroidViewModel(application: Application) : AndroidViewModel(application)
     fun unsetAsteroid(){
         _asteroidSelected.value = null
     }
+
 
 
 
