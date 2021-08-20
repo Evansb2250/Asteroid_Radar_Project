@@ -42,7 +42,12 @@ class AstroidViewModel(application: Application) : AndroidViewModel(application)
     init {
         viewModelScope.launch {
             Log.i(DEBUG_LOG, "requesting data")
-            repository.refreshData()
+            viewModelScope.launch {
+                repository.refreshAsteroidsFromNetwork()
+                repository.refreshImageOfTheDay()
+
+            }
+
         }
     }
 

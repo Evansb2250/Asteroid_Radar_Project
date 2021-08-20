@@ -8,7 +8,7 @@ interface AsteroidDao {
 
     //Insert a list of asteroids, onConflict strategy is set to replace duplicate id's
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllAsteroids(databaseAsteroids: List<DatabaseAsteroid>)
+    suspend fun insertAllAsteroids( databaseAsteroids: List<DatabaseAsteroid>)
 
 
     //retrieves a specific asteroid
@@ -34,7 +34,7 @@ interface ImageOfTheDayDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertImage(image:DatabaseImageOfTheDay) // adds an image
 
-    @Query("SELECT * FROM imageoftheday_table ORDER BY date ASC LIMIT 1")
+    @Query("SELECT * FROM imageoftheday_table ORDER BY date DESC LIMIT 1")
      fun getCurrentImage():LiveData<DatabaseImageOfTheDay?>
 
     @Query("DELETE From imageoftheday_table")

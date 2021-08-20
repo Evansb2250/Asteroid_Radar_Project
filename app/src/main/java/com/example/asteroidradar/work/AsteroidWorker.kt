@@ -18,7 +18,8 @@ class AsteroidWorker( context: Context, workerParameters: WorkerParameters): Cor
         val database = getDatabase(applicationContext)
         val repository = Repository(database)
         return try {
-            repository.refreshData()
+            repository.refreshAsteroidsFromNetwork()
+            repository.refreshImageOfTheDay()
             Result.success()
         } catch (e: HttpException) {
             Result.retry()

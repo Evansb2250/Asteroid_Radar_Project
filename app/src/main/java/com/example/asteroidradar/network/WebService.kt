@@ -1,12 +1,9 @@
 package com.example.asteroidradar.network
 
-import android.util.Log
 import com.example.asteroidradar.BACK_DATE
 import com.example.asteroidradar.CURRENT_DATE
 import com.example.asteroidradar.DATEFORMAT
-import com.example.asteroidradar.DEBUG_LOG
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
@@ -70,6 +67,7 @@ suspend fun getAsteroidsFromApi(): String? {
     try {
         val dates = calculateWeekSevenDaysOut()
         return NasaApi.retrofitService.getProperties(dates.get(BACK_DATE)!!,dates.get(CURRENT_DATE)!!)
+
     } catch (e: Exception) {
 
     }
@@ -90,19 +88,8 @@ fun calculateWeekSevenDaysOut(): HashMap<String, String> =
 
 
 //request the image of the day from Nasa web service
-suspend fun getImageFromApi(): String? {
+suspend fun getImageFromApi(): String?= NasaApi.retrofitService.getImageOfTheDay()
 
-        try{
-            val image = NasaApi.retrofitService.getImageOfTheDay()
-            Log.i(DEBUG_LOG, "IMAGE  ${image.toString()}")
-            return image
-        }catch(e: HttpException){
-
-        }
-
-
-    return null
-}
 
 
 

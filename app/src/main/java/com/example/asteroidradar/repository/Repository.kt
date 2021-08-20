@@ -21,62 +21,45 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.json.JSONObject
 import org.json.JSONTokener
-import retrofit2.HttpException
-import java.net.UnknownHostException
 
 class Repository(val database: AsteroidDatabase) {
 
-    val asteroids: LiveData<List<Asteroid>> = Transformations.map(database.asteroidDao().getAsteroids()) {
+    val asteroids: LiveData<List<Asteroid>> =
+        Transformations.map(database.asteroidDao().getAsteroids()) {
             it.asDomainModel()
         }
-    val imageOfTheDay:LiveData<ImageOfTheDay?> = Transformations.map(database.imageDao().getCurrentImage()){
-       it?.let {ImageDatabaseModelToDomain(it) }  }
-
-
-
-    suspend fun refreshData(){
-        //e Unknown Host Exception prevents the app from crashing if there is no
-        // internet connection.
-        try{
-            refreshAsteroidsFromNetwork()
-            refreshImageOfTheDay()
-        }catch (e: UnknownHostException){
-
+    val imageOfTheDay: LiveData<ImageOfTheDay?> =
+        Transformations.map(database.imageDao().getCurrentImage()) {
+            it?.let { ImageDatabaseModelToDomain(it) }
         }
 
-    }
 
 
-    private suspend fun refreshAsteroidsFromNetwork() {
+    suspend fun refreshAsteroidsFromNetwork() {
         Log.i(DEBUG_LOG, " in the refreshAsteroid")
         //use a network call to gather information from the api
         withContext(Dispatchers.IO) {
-            getJSonObject()?.let {
-                    database.asteroidDao().insertAllAsteroids(jsonParser(it).toDatabaseDomain())
-            }
+          do {
+              val result = getAsteroidsFromApi()?.let {
+                  val jsonObject = JSONTokener(it).nextValue() as JSONObject
+                  database.asteroidDao()
+                      .insertAllAsteroids(jsonParser(jsonObject).toDatabaseDomain())
+              }
+          }while(result == null)
+
         }
     }
 
 
-    private suspend fun refreshImageOfTheDay(){
+    suspend fun refreshImageOfTheDay() {
         val format = Json { ignoreUnknownKeys = true }
         withContext(Dispatchers.IO) {
-            getImageFromApi()?.let {
-                val imageObject =  format.decodeFromString<ImageOfTheDayDTO>(it)
-                database.imageDao().insertImage(ImagetoDatabaseModel(imageObject))
-            }
+           do {
+             val result =  getImageFromApi()?.let {
+                   val imageObject = format.decodeFromString<ImageOfTheDayDTO>(it)
+                   database.imageDao().insertImage(ImagetoDatabaseModel(imageObject))
+               }
+           }while (result == null)
         }
     }
-}
-
-
-private suspend fun getJSonObject(): JSONObject? {
-    try {
-         getAsteroidsFromApi()?.let {
-             return JSONTokener(it).nextValue() as JSONObject
-         }
-    } catch (e: HttpException) {
-
-    }
-    return null
 }
