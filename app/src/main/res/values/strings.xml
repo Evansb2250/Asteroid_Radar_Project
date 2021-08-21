@@ -9,8 +9,5 @@
     <string name="estimate_diameter_textview">Estimated diameter</string>
     <string name="relative_velocity">Relative Velocity</string>
     <string name="distance_from_earth">Distance from earth</string>
-    <string name="auFormater">%1$d au.</string>
-    <string name="estiamtedDiameterFormat">%1$d km</string>
-    <string name="relativeVelocityFormat">%1$d km/s.</string>
 
 </resources>

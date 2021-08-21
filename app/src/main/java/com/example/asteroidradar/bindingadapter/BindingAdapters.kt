@@ -19,22 +19,30 @@ fun bindImage(imageView: ImageView, url: String?) {
 
 @BindingAdapter("asteroidImage")
 fun bindAsteroidImage(imageView: ImageView, astroid: Asteroid) {
-    imageView.setImageResource(
-        when (astroid.isHazardous) {
-            true -> R.drawable.asteroid_hazardous
-            else -> R.drawable.asteroid_safe
+    when (astroid.isHazardous) {
+        true -> {
+            imageView.setImageResource(R.drawable.asteroid_hazardous)
+            imageView.contentDescription = "Astroid discovered on ${astroid.approachDate} is hazardous"
         }
-    )
+        else -> {
+            imageView.setImageResource(R.drawable.asteroid_safe)
+            imageView.contentDescription = "Astroid discovered on ${astroid.approachDate} is non-threatening"
+        }
+    }
+
+
 }
 
 
 @BindingAdapter("convertLongToString", "type")
 fun bindAndConverValue(textView: TextView, value: Double, type: Int) {
-    textView.setText(when (type) {
-        1 -> "${value} km"
-        2 -> "${value} km/s"
-        else -> "${value} au"
-    })
+    textView.setText(
+        when (type) {
+            1 -> "${value} km"
+            2 -> "${value} km/s"
+            else -> "${value} au"
+        }
+    )
 
 
 }
