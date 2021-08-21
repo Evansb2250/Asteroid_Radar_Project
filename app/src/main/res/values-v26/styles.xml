@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="astroid_Detail_Headers">
+        <item name="android:textColor">@color/teal_200</item>
+        <item name="android:font">@font/arya_bold</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="layout_goneMarginLeft">5dp</item>
+    </style>
+
+    <style name="astroid_Detail_Text">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:font">@font/arya_bold</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="layout_goneMarginLeft">5dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+
+
+</resources>

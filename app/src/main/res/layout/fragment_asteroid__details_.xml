@@ -1,14 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.Asteroid_Details_Fragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+        <variable
+            name="astroid"
+            type="com.example.asteroidradar.domain.Asteroid" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#000000"
+        tools:context=".ui.Asteroid_Details_Fragment">
 
-</FrameLayout>
+
+        <ImageView
+            android:id="@+id/asteroidImage"
+            android:layout_width="407dp"
+            android:layout_height="250dp"
+            app:asteroidImage="@{astroid}"
+            app:layout_constraintBottom_toTopOf="@+id/asteroid_detail_table"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TableLayout
+            android:id="@+id/asteroid_detail_table"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/side_list_item_margin"
+            android:layout_marginLeft="@dimen/side_list_item_margin"
+            android:layout_marginEnd="@dimen/side_list_item_margin"
+            android:layout_marginRight="@dimen/side_list_item_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.79">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/close_approach_textview"
+                    style="@style/astroid_Detail_Headers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:text="@string/close_approach_date" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/close_approach"
+                    style="@style/astroid_Detail_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{astroid.approachDate}" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+
+                <TextView
+                    android:id="@+id/absolute_magnitude_textview"
+                    style="@style/astroid_Detail_Headers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/absolute_magnitude" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+
+                <TextView
+                    android:id="@+id/absolute_magnitude"
+                    style="@style/astroid_Detail_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:convertLongToString="@{astroid.astronomical}" app:type= "@{3}"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+
+                <TextView
+                    android:id="@+id/estimate_diameter_textview"
+                    style="@style/astroid_Detail_Headers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/estimate_diameter_textview" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+
+                <TextView
+                    android:id="@+id/estimate_diameter"
+                    style="@style/astroid_Detail_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:convertLongToString="@{astroid.estimatedDiameterMax}" app:type="@{1}"
+                    />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+
+                <TextView
+                    android:id="@+id/relative_velocity_textview"
+                    style="@style/astroid_Detail_Headers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/relative_velocity" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+
+                <TextView
+                    android:id="@+id/relative_velocity"
+                    style="@style/astroid_Detail_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:convertLongToString="@{astroid.kilometersPerSecond}" app:type="@{2}"
+                    />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+
+                <TextView
+                    android:id="@+id/distance_from_earth_textView"
+                    style="@style/astroid_Detail_Headers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/distance_from_earth" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="10dp">
+
+                <TextView
+                    android:id="@+id/distance_from_earth"
+                    style="@style/astroid_Detail_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:convertLongToString="@{astroid.astronomical}" app:type= "@{3}" />
+
+            </TableRow>
+
+
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

@@ -2,7 +2,6 @@ package com.example.asteroidradar
 
 import android.app.Application
 import android.os.Build
-import android.util.Log
 import androidx.work.*
 import com.example.asteroidradar.work.AsteroidWorker
 import kotlinx.coroutines.CoroutineScope
@@ -23,13 +22,11 @@ class AsteroidApplication : Application() {
      */
     override fun onCreate() {
         super.onCreate()
-        Log.i(DEBUG_LOG, " in the on create function of Application")
         delayedInit()
     }
 
     private fun delayedInit() {
         applicationScope.launch {
-            Log.i(DEBUG_LOG, " initiate delayedInit")
             setupRecurringWork()
         }
     }
@@ -69,12 +66,11 @@ class AsteroidApplication : Application() {
          the ExistingPeriodicWorkPolicy. Pass in repeatingRequest as the PeriodicWorkRequest parameter.
          */
 
-        Log.i(DEBUG_LOG, " in set up recurring work")
         WorkManager.getInstance().enqueueUniquePeriodicWork(AsteroidWorker.WORK_NAME, ExistingPeriodicWorkPolicy.KEEP,
             repeatingRequest
         )
 
-        Log.i(DEBUG_LOG, " after work")
+
         /*
         If pending (uncompleted) work exists with the same name, the ExistingPeriodicWorkPolicy.KEEP parameter makes the WorkManager
         keep the previous periodic work and discard the new work request.

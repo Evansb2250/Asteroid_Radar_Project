@@ -4,4 +4,13 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="PlaceHolderText">TextView</string>
     <string name="emoji_details_content_description">expresses if the astroid is hazardous</string>
+    <string name="absolute_magnitude">Absolute magnitude</string>
+    <string name="close_approach_date">Close approach date</string>
+    <string name="estimate_diameter_textview">Estimated diameter</string>
+    <string name="relative_velocity">Relative Velocity</string>
+    <string name="distance_from_earth">Distance from earth</string>
+    <string name="auFormater">%1$d au.</string>
+    <string name="estiamtedDiameterFormat">%1$d km</string>
+    <string name="relativeVelocityFormat">%1$d km/s.</string>
+
 </resources>

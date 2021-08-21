@@ -59,8 +59,6 @@ class Astroid_Fragment : Fragment() {
         })
 
 
-
-
         vm.neoNasaObject.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
@@ -69,8 +67,4 @@ class Astroid_Fragment : Fragment() {
     }
 
 
-
-
-    companion object {
-    }
 }
