@@ -16,18 +16,18 @@ class AstroidAdapter(val clickListener: AstroidListener) :
 
 
     class AstroidItemViewHolder(val binding: AsteroidListItemsBinding) : RecyclerView.ViewHolder(binding.root) {
-        var idTextView: TextView
+        var nameTextView: TextView
         var dateTextView: TextView
         var emojiImageView: ImageView
 
         init {
-            idTextView = binding.astroidIDTextView
+            nameTextView = binding.astroidIDTextView
             dateTextView = binding.astroidDateTextView
             emojiImageView = binding.astroidEmoji
         }
 
         fun bind(clickListener: AstroidListener, asteroid: Asteroid) {
-            idTextView.text = asteroid.id.toString()
+            nameTextView.text = asteroid.name
             dateTextView.text = asteroid.approachDate
             binding.asteroid = asteroid
             binding.clickListener = clickListener

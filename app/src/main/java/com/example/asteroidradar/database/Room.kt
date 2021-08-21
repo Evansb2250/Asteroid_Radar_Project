@@ -8,9 +8,6 @@ import androidx.room.RoomDatabase
 //creates a database object
 @Database(entities = arrayOf(DatabaseAsteroid::class, DatabaseImageOfTheDay::class),version= 2, exportSchema = false)
 abstract class AsteroidDatabase: RoomDatabase(){
-
-
-
      //abstract function that returns an AsteriodDao
      abstract fun asteroidDao():AsteroidDao
      abstract fun imageDao() : ImageOfTheDayDao

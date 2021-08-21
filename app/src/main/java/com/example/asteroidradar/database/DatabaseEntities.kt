@@ -11,6 +11,7 @@ import java.util.*
 data class DatabaseAsteroid(
     @PrimaryKey(autoGenerate = false)
     var id: Long= 0L,
+    var name: String,
     var approach_date: Long = 0L,
     var absolute_magnitude:Double = 0.0,
     var estimated_diameter_max:Double = 0.0,
@@ -20,9 +21,9 @@ data class DatabaseAsteroid(
 
 fun List<DatabaseAsteroid>.asDomainModel():List<Asteroid>{
     return map {
-
         Asteroid(
             id = it.id,
+            name= it.name,
             approachDate = DATEFORMAT.format(Date(it.approach_date)),
             absoluteMagnitude = it.absolute_magnitude,
             estimatedDiameterMax = it.estimated_diameter_max,

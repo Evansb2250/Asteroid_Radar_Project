@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 
 data class AsteroidDTO(
     var id: Long = -1L,
+    var name:String,
     var absoluteMagnitude: Double = -1.0,
     var estimatedDiameterMax: Double = -1.0,
     var isHazardous: Boolean,
@@ -22,6 +23,7 @@ fun ArrayList<AsteroidDTO>.toDatabaseDomain():List<DatabaseAsteroid>{
     return map {
         DatabaseAsteroid(
             id = it.id,
+            name = it.name,
             absolute_magnitude = it.absoluteMagnitude,
             estimated_diameter_max = it.estimatedDiameterMax,
             hazardous = it.isHazardous,

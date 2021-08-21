@@ -26,6 +26,7 @@ Cycles through the dates in the Json and creates a list Asteroids based on the A
         for (i in 0 until jsonArray.length()) {
             val transferObject = AsteroidDTO(
                 jsonArray.getJSONObject(i).getString(JSON_ELEMENT_ID).toLong(),
+                jsonArray.getJSONObject(i).getString(JSON_NAME),
                 jsonArray.getJSONObject(i).getString(ABSOLUTE_MAGNITUDE).toDouble(),
                 jsonArray.getJSONObject(i).getJSONObject(ESTIMATED_DIAMETERS)
                     .getJSONObject(KILOMETERS).getString(ESTIMATED_DIAMETER_MAX).toDouble(),

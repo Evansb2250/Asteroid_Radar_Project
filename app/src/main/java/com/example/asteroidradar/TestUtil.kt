@@ -8,6 +8,7 @@ class TestUtil {
     companion object {
         fun createAsteroid(
             id: Long,
+            name:String,
             approach_date: Long,
             absolute_magnitude: Double,
             estimated_diameter_max: Double,
@@ -18,6 +19,7 @@ class TestUtil {
 
             return DatabaseAsteroid(
                 id,
+                name,
                 approach_date,
                 absolute_magnitude,
                 estimated_diameter_max,
